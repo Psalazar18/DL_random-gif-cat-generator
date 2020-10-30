@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="celeste">
+    <div class="celeste1">
       <h1>Random Gif Cat</h1>
     </div>
     <div class="cherry">
@@ -28,8 +28,9 @@
         <input type="text" name="size" v-model="size">
         <button type="submit">Obtener mi gatito</button>
       </form>
+      <div class=circle></div>
     </div>
-    <div class="celeste">
+    <div class="celeste2">
       <img :src="gatitos" alt="">
     </div>
   </div>
@@ -52,7 +53,7 @@ export default {
       fetch(`https://cataas.com/cat/gif/says/${this.titulo}?filter=${this.filtro}&color=${this.value}&size=${this.size}`)
       .then(result => {
         this.gatitos = result.url;
-        console.log(this.value)
+        console.log("esperando")
       })
       .catch(error=> console.error(error)) 
     }
@@ -74,17 +75,36 @@ label{
 button{
   margin-top: 1em;
 }
-.celeste{
+.celeste1{
   background-color: cadetblue;
   height: 150px;
 }
+.celeste2{
+  background-color: cadetblue;
+  height: 400px;
+}
+img{
+  margin: 5em 35em;
+}
 .cherry{
   background-color: firebrick;
+  height: 256px;
 }
 h1{
   font-size: 30px;
   font-weight: bolder;
   text-align: center;
-  padding-top: 2em;
+  padding: 2em;
+  margin: 0;
+}
+.circle {
+  display: flex;
+  border: 2px solid black;
+  background-color: blanchedalmond;
+  border-radius: 50%;
+  width: 50px; 
+  height: 50px;
+  box-sizing: border-box;
+  margin: -10em 17em 0em 64em;
 }
 </style>
