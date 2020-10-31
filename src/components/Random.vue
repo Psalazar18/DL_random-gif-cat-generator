@@ -4,7 +4,7 @@
       <h1>Random Gif Cat</h1>
     </div>
     <div class="cherry">
-      <form  @submit.prevent="buscarGatito">
+      <form @submit.prevent="buscarGatito">
         <label for="texto">Titulo:</label> 
         <input type="text" name="texto" v-model="titulo">
         <label for="filtro">Filtro:</label> 
@@ -17,7 +17,7 @@
           <option value="pixel">Pixel</option>
         </select>
         <label for="color">Color:</label>
-        <select name="color" v-model="value">
+        <select name="color" v-model="value" @change="circle(value)">
           <option value="red">Rojo</option>
           <option value="green">Verde</option>
           <option value="black">Negro</option>
@@ -28,7 +28,7 @@
         <input type="text" name="size" v-model="size">
         <button type="submit">Obtener mi gatito</button>
       </form>
-      <div class=circle></div>
+      <div class="circle" :style="styleObject"></div>
     </div>
     <div class="celeste2">
       <img :src="gatitos" alt="">
@@ -45,7 +45,10 @@ export default {
       filtro: '',
       value: '',
       size: '',
-      gatitos: ''
+      gatitos: '',
+      styleObject: {
+        backgroundColor: '',
+      }
     }
   },
   methods: {
@@ -53,9 +56,30 @@ export default {
       fetch(`https://cataas.com/cat/gif/says/${this.titulo}?filter=${this.filtro}&color=${this.value}&size=${this.size}`)
       .then(result => {
         this.gatitos = result.url;
-        console.log("esperando")
       })
       .catch(error=> console.error(error)) 
+    },
+
+    circle(value) {
+      if(value == 'red') {
+        this.styleObject.backgroundColor = 'red';
+      }
+
+      if(value == 'green') {
+        this.styleObject.backgroundColor = 'green';
+      }
+
+      if(value == 'black') {
+        this.styleObject.backgroundColor = 'black';
+      }
+
+      if(value == 'white') {
+        this.styleObject.backgroundColor = 'white';
+      }
+
+      if(value == 'blue') {
+        this.styleObject.backgroundColor = 'blue';
+      }
     }
   },
 }
@@ -74,6 +98,8 @@ label{
 }
 button{
   margin-top: 1em;
+  width: 18%;
+  margin-left: 42%;
 }
 .celeste1{
   background-color: cadetblue;
